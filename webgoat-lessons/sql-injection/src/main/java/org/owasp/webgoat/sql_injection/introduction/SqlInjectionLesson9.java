@@ -57,10 +57,10 @@ public class SqlInjectionLesson9 extends AssignmentEndpoint {
         StringBuffer output = new StringBuffer();
         String query = "SELECT * FROM employees WHERE last_name = ? AND auth_tan = ?";
 
-        try (Connection connection = dataSource.getConnection()) {
+        try (Connection connection = dataSource.getConnection(); PreparedStatement statement = connection.prepareStatement(query)) {
             try {
 
-                PreparedStatement statement = connection.prepareStatement(query);
+
                 statement.setString(1, name);
                 statement.setString(2, auth_tan);
 
